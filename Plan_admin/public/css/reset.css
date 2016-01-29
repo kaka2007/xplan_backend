@@ -1,0 +1,64 @@
+body,p,div,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,form,input,select,table,tr,td,th{
+	margin:0;
+	padding:0;
+}
+html,body{
+	height:100%;
+}
+body{
+	font:14px/24px 微软雅黑;
+}
+
+ul,ol{
+	list-style:none;
+}
+
+h1,h2,h3,h4,h5,h6,b,strong,th{
+	font-weight:normal;
+}
+
+i,em{
+	font-style:normal;
+}
+
+a img{
+	border:none;
+}
+
+a{
+	color:#000;
+	text-decoration:none;
+}
+
+a:hover{
+	color:#900;	
+}
+
+table{
+	width:100%;
+	border-collapse:collapse;
+}
+
+td{
+	padding:5px 10px;
+	border-spacing:0;
+}
+th{
+	padding:5px 10px;
+	width:100px;
+	text-align:left;
+}
+.clear:after{
+	display:block;
+	height:0;
+	visibility:hidden;
+	content:'.';
+	clear:both;
+}
+
+.clear{
+	zoom:1;
+}
+
+
+

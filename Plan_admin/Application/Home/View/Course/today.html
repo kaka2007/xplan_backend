@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>课程信息</title>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/reset.css"/>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/global.css"/>
+<script type="text/javascript" src="/xplan_backend/Plan_admin/public/jquery/jquery-1.4.js"></script>
+<style type="text/css">
+.plus{
+	background:url(/xplan_backend/Plan_admin/public/images/plus.gif) no-repeat left center;
+}
+.minus{
+	background:url(/xplan_backend/Plan_admin/public/images/minus.gif) no-repeat left center;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(
+	function(){
+		for(var $n=1;$n<5;$n++){
+			$("#div"+$n).hover(
+				function (){
+					$(this).css("background-color","gray");
+					$(this).find("div").slideDown(300);
+				},
+				function (){
+					$(this).css("background-color","#E4E9EC");
+					$(this).find("div").slideUp(300);
+				});
+		}
+})
+function toggleItem(id){
+	var menuEle=document.getElementById('menu'+id);
+	var listEle=document.getElementById('list'+id);
+	if (menuEle.style.display==''||menuEle.style.display=='block') {
+		menuEle.style.display = 'none';
+		listEle.className='plus';
+	}else{
+		menuEle.style.display = 'block';
+		listEle.className='minus';
+	}
+}
+
+</script>
+</head>
+<body>
+	  <div id="continer">
+<div>
+	<include file="Public:topnavi" />
+</div>
+<div id="init">
+		<div id="menu-body">
+			<include file="Public:menu" />
+		</div>
+	<div id="wel">
+
+	<table>
+			<tr class="typeTop" align="center">
+				<td width="35">编号</td>
+				<td width="45">姓名</td>
+				<td width="35">计划</td>
+				<td width="45">教练</td>
+				<td>今天课程</td>		
+				<td>之前课程时间</td>	
+			</tr>
+			<foreach name="course" key="k" item="v">
+			<if condition="$k%2==0">
+			<assign name="color" value="#F0F4FD" />
+			<else />
+			<assign name="color" value="#FFFFFF" />
+			</if>
+			<tr style="background-color:{$color}" align="center">
+				<td>{$offset++}</td>
+				<td>{$v.name}</td>
+				<td>{$v.plan}</td>
+				<td>{$v.cname}</td>
+				<td>{$v.iscourse}</td>
+				<td>{$v.course_time}&nbsp;&nbsp;{$v.week}</td>
+				
+			</tr>
+			</foreach>
+			<tr>
+				<td colspan="8" class="pages" align="center">
+				{$pageList}
+				</td>
+			</tr>
+		</table>
+
+		</div>
+	</div>
+</div>
+</body>
+</html>

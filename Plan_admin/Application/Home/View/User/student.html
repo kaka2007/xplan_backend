@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>学员管理</title>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/reset.css"/>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/global.css"/>
+<script type="text/javascript" src="/xplan_backend/Plan_admin/public/jquery/jquery-1.4.js"></script>
+<style type="text/css">
+.plus{
+	background:url(/xplan_backend/Plan_admin/public/images/plus.gif) no-repeat left center;
+}
+.minus{
+	background:url(/xplan_backend/Plan_admin/public/images/minus.gif) no-repeat left center;
+}
+
+#msg{
+	width:700px;
+	margin-bottom: 5px;
+	color:green;
+	text-align: center;
+	font-size: 16px;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(
+	function(){
+		for(var $n=1;$n<5;$n++){
+			$("#div"+$n).hover(
+				function (){
+					$(this).css("background-color","gray");
+					$(this).find("div").slideDown(300);
+				},
+				function (){
+					$(this).css("background-color","#E4E9EC");
+					$(this).find("div").slideUp(300);
+				});
+		}
+})
+function toggleItem(id){
+	var menuEle=document.getElementById('menu'+id);
+	var listEle=document.getElementById('list'+id);
+	if (menuEle.style.display==''||menuEle.style.display=='block') {
+		menuEle.style.display = 'none';
+		listEle.className='plus';
+	}else{
+		menuEle.style.display = 'block';
+		listEle.className='minus';
+	}
+}
+
+function getCourse(uid){
+	window.location.href="/xplan_backend/Plan_admin/index.php/home/User/getCourse/uid/"+uid;
+}
+ 
+function changeInfo(uid){
+	var timeEnd=$("#paytime"+uid).val();
+
+	window.location.href="/xplan_backend/Plan_admin/index.php/home/User/getCourseCoach/uid/"+uid+"/time_end/"+timeEnd;
+} 
+
+$(document).ready(function() {  
+        var vdefault = $('#searchname').val();  
+  
+    $('#searchname').focus(function() {    
+            if ($(this).val() == vdefault) {  
+                $(this).val("");  
+            }  
+        });  
+    $('#searchname').blur(function() {    
+            if ($(this).val()== "") {  
+                $(this).val(vdefault);  
+            }  
+        });  
+});  
+</script>
+</head>
+<body>
+	  <div id="continer">
+<div>
+	<include file="Public:topnavi" />
+</div>
+<div id="init">
+		<div id="menu-body">
+			<include file="Public:menu" />
+		</div>
+	<div id="wel">
+	<form name="form" action="/xplan_backend/Plan_admin/index.php/home/User/searchStudent" method="post">
+		<div id="search">
+			<span class="searchspan">搜索学员：</span>
+			<input id="searchname"  name="keyword" type="text" value="请输入姓名或昵称或手机号" style="width:145px;">
+			&nbsp;
+			<span class="searchspan">搜索方式：</span>
+			<select style="height:22px;" name="searchType">
+				<option value="name">姓名</option>
+				<option value="phone">手机号</option>
+				<option value="nicker">昵称</option>
+			</select>
+			<input id="searchbtn" type="submit" value="搜索">
+		</div>
+		<div id="msg">点击姓名查看学员信息</div>
+	</form>
+	<table>
+		<tr class="typeTop" align="center">
+			<td>编号</td>
+			<td>ID</td>
+			<td>姓名</td>
+			<td>性别</td>
+			<td>支付时间</td>
+			<td>查看课程进展</td>
+			<td>修改信息</td>
+			<td>查看评论</td>
+		</tr>
+		<foreach name="student" key="k" item="v">
+		<if condition="$k%2==0">
+		<assign name="color" value="#F0F4FD" />
+		<else />
+		<assign name="color" value="#FFFFFF" />
+		</if>
+		<tr style="background-color:{$color}" align="center">
+			<td>{$offset++}</td>
+			<td>{$v.id}</td>
+			<td><a href="/xplan_backend/Plan_admin/index.php/home/User/getUserInfo/uid/{$v.id}">{$v.name}</a></td>
+			<if condition="$v['gender']==0">
+				<td>男</td>
+				<else />
+				<td>女</td>
+			</if>
+			<td>{$v.time_end}</td>
+			<td>
+				<input onclick="getCourse({$v.id})" type="button" value="点击查看" style="height:22px;width:60px;">
+			</td>
+			<td>
+			<input onclick="changeInfo({$v.id})" type="button" value="点击进入" style="height:22px;width:60px;">
+			<input type="hidden" value="{$v.time_end}" id="paytime{$v.id}">
+			</td>
+		<td>
+			<a href="#">点击查看</a>
+		</td>
+		</foreach>
+		</tr>
+		<if condition="$count!=''">
+		<tr>
+			<td colspan="8" class="pages" align="center">
+				<span>共{$count}个付款健友</span>
+			</td>
+		</tr>
+		</if>
+		<tr>
+		<td colspan="8" class="pages" align="center">
+		
+		{$pageList}
+		</td>
+			</tr>
+		</table>
+	</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>添加管理员</title>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/reset.css"/>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/global.css"/>
+<script type="text/javascript" src="/xplan_backend/Plan_admin/public/jquery/jquery-1.4.js"></script>
+<style type="text/css">
+.plus{
+  background:url(/xplan_backend/Plan_admin/public/images/plus.gif) no-repeat left center;
+}
+.minus{
+  background:url(/xplan_backend/Plan_admin/public/images/minus.gif) no-repeat left center;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(
+  function(){
+    for(var $n=1;$n<5;$n++){
+      $("#div"+$n).hover(
+        function (){
+          $(this).css("background-color","gray");
+          $(this).find("div").slideDown(300);
+        },
+        function (){
+          $(this).css("background-color","#E4E9EC");
+          $(this).find("div").slideUp(300);
+        });
+    }
+})
+function toggleItem(id){
+  var menuEle=document.getElementById('menu'+id);
+  var listEle=document.getElementById('list'+id);
+  if (menuEle.style.display==''||menuEle.style.display=='block') {
+    menuEle.style.display = 'none';
+    listEle.className='plus';
+  }else{
+    menuEle.style.display = 'block';
+    listEle.className='minus';
+  }
+}
+function checkPassword(){
+	var password1=document.getElementById("password1").value;
+	var password2=document.getElementById("password2").value;
+	if(password1!=password2){
+		document.getElementById("passSpan").innerHTML="<font color='red'>两次输入新密码不一致</font>";
+	}else{
+		document.getElementById("passSpan").innerHTML="";
+	}
+}
+
+function checkName(){
+	if($("[name=userName]").val()==""){
+		$("#nameSpan").html("用户名不能为空");
+
+	}else{
+		$("#nameSpan").html("");
+	}
+}
+
+function checkNewPassword(){
+
+	var password1=$("#password1").val();
+
+	if(password1.length!=6){
+
+		$("#newSpan").html("密码长度为六位！");
+
+	}else{
+		$("#newSpan").html("*");
+	}
+}
+
+function checkAll(){
+	var userName=$("[name=userName]").val();
+	var password1=$("#password1").val();
+	var password2=$("#password2").val();
+	var password3=$("#password3").val();
+	if(userName==""){
+		alert("用户名不能为空");
+		$("[name=userName]").focus();
+		return false;
+	}else if(password3==""){
+		alert("原密码不能为空");
+		$("#password3").focus();
+		return false;
+	}else if(password1==""){
+		alert("新密码不能为空");
+		$("#password1").focus();
+		return false;
+	}else if(password2==""){
+		alert("确认密码不能为空");
+		$("#password2").focus();
+		return false;
+	}else{
+		if(confirm("确认修改！")){
+			return true;
+		}else{
+			return false;
+		}
+	}
+}
+</script>
+</head>
+<body>
+  <div id="continer">
+<div>
+  <include file="Public:topnavi" />
+</div>
+<div id="init">
+    <div id="menu-body">
+      <include file="Public:menu" />
+    </div>
+    <div id="wel">
+		<form id="form1" name="form1" action="/xplan_backend/Plan_admin/index.php/home/Admin/updateUser" onsubmit="return checkAll()" method="post">
+			<table id="userTable">
+				<tr>
+					<td align="right" width="200">用户名：</td>
+					<td>
+						<input type="text" name="userName" class="height" onblur="checkName()" value="{$username}"/>&nbsp;&nbsp;<span id="nameSpan" style="color:red;">*</span>
+					</td>
+				</tr>
+				<tr>
+					<td align="right" width="200">原密码：</td>
+						<td>
+							<input type="password" id="password3" name="oldpassword" class="height"/>
+						&nbsp;&nbsp;<span id="wordSpan" style="color:red;">*</span>
+						</td>
+					</tr>
+				<tr>
+					<td align="right" width="200">新密码：</td>
+						<td>
+							<input type="password" id="password1" name="newpassword" class="height" onblur="checkNewPassword()"/>
+						&nbsp;&nbsp;<span id="newSpan" style="color:red;">*密码为六位字母或数字</span>
+						</td>
+				</tr>
+				<tr>
+					<td align="right" width="200">确认新密码：</td>
+						<td><input type="password" id="password2" class="height" onblur="checkPassword()"/>&nbsp;&nbsp;
+						<span id="passSpan" style="color:red;">*</span>
+					</td>
+				</tr>
+<!-- 				<tr>
+	<td align="right" width="200">用户类型：</td>
+	<td>
+		<input type="text" name="userType" class="height" onblur="checkType()">
+	</td>
+</tr> -->
+
+				<tr>
+
+					<td id="adduser" colspan="2">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="submit" value="修改" style="width:45px;height:25px;">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="reset" value="取消" style="width:45px;height:25px;">
+						</div>
+				</tr>
+			</table>
+		</form>
+	</div>
+</div>
+</body>
+</html>

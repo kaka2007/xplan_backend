@@ -1,0 +1,25 @@
+<!--menu-->
+
+	<h2><a href="#" onclick="logout()"><span>退出后台</a></span></h2>
+	<h2 class="minus" id="list1" onclick="toggleItem('1')"><span>用户管理</span></h2>
+	<ul id="menu1">
+		<li><a href="/xplan_backend/Plan_admin/index.php/home/User/getCoach">教练管理</a></li>
+		<li><a href="/xplan_backend/Plan_admin/index.php/home/User/getStudent">学员管理</a></li>
+	</ul>
+	<h2 class="minus" id="list2" onclick="toggleItem('2')"><span>计划管理</span></h2>
+	<ul id="menu2">
+		<li><a href="">添加计划</a></li>
+		<li><a href="/xplan_backend/Plan_admin/index.php/home/Plan/update">修改计划</a></li>
+	</ul>
+	<h2 class="minus" id="list3" onclick="toggleItem('3')"><span>课程管理</span></h2>	
+	<ul id="menu3">
+		<li><a href="/xplan_backend/Plan_admin/index.php/home/Course/getTodayCourse">今天课程</a></li>
+		<li><a href="/xplan_backend/Plan_admin/index.php/home/Course/getTomorrowCourse">明日课程</a></li>
+		<li><a href="/xplan_backend/Plan_admin/index.php/home/Course/getManydayCourse">多日课程</a></li>
+	</ul>	
+	<h2 class="minus" id="list4" onclick="toggleItem('4')"><span>添加管理员</span></h2>
+	<ul id="menu4">
+		<li><a href="/xplan_backend/Plan_admin/index.php/home/Admin/index">添加管理员</a></li>
+		<li><a href="/xplan_backend/Plan_admin/index.php/home/Admin/update">修改管理员</a></li>
+	</ul>
+	<h2><a href="/xplan_backend/Plan_admin/index.php/home/Index/index">返回主页</a></h2>

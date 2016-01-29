@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>教练管理</title>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/reset.css"/>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/global.css"/>
+<script type="text/javascript" src="/xplan_backend/Plan_admin/public/jquery/jquery-1.4.js"></script>
+<style type="text/css">
+.plus{
+	background:url(/xplan_backend/Plan_admin/public/images/plus.gif) no-repeat left center;
+}
+.minus{
+	background:url(/xplan_backend/Plan_admin/public/images/minus.gif) no-repeat left center;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(
+	function(){
+		for(var $n=1;$n<5;$n++){
+			$("#div"+$n).hover(
+				function (){
+					$(this).css("background-color","gray");
+					$(this).find("div").slideDown(300);
+				},
+				function (){
+					$(this).css("background-color","#E4E9EC");
+					$(this).find("div").slideUp(300);
+				});
+		}
+})
+function toggleItem(id){
+	var menuEle=document.getElementById('menu'+id);
+	var listEle=document.getElementById('list'+id);
+	if (menuEle.style.display==''||menuEle.style.display=='block') {
+		menuEle.style.display = 'none';
+		listEle.className='plus';
+	}else{
+		menuEle.style.display = 'block';
+		listEle.className='minus';
+	}
+}
+function checkUpdate(status,id){
+	if(status==0){
+		cstatus="满员";
+	}else{
+		cstatus="正常";
+	}
+	if(confirm("确认修改该教练状态为"+cstatus)){
+		window.location="/xplan_backend/Plan_admin/index.php/home/User/updateStatus/status/"+status+"/id/"+id;
+	}
+
+}
+
+function getStudent(coachid){
+	window.location.href="/xplan_backend/Plan_admin/index.php/home/User/getStudent/coachid/"+coachid;
+}
+ 
+$(document).ready(function() {  
+        var vdefault = $('#searchname').val();  
+  
+    $('#searchname').focus(function() {    
+            if ($(this).val() == vdefault) {  
+                $(this).val("");  
+            }  
+        });  
+    $('#searchname').blur(function() {    
+            if ($(this).val()== "") {  
+                $(this).val(vdefault);  
+            }  
+        });  
+});  
+</script>
+</head>
+<body>
+<div id="continer">
+	<div>
+		<include file="Public:topnavi" />
+	</div>
+	<div id="init">
+		<div id="menu-body">
+			<include file="Public:menu" />
+		</div>
+		<div id="wel">
+			<form name="form" action="/xplan_backend/Plan_admin/index.php/home/User/searchCoach" method="post">
+			<div id="search">
+				<span class="searchspan">搜索教练：</span>
+				<input id="searchname" name="keyword" type="text" value="请输入姓名或昵称或手机号" style="width:145px;">
+				&nbsp;
+				<span class="searchspan">搜索方式：</span>
+				<select style="height:22px;" name="searchType">
+					<option value="name">姓名</option>
+					<option value="username">手机号</option>
+					<option value="nicker">昵称</option>
+				</select>
+				<input id="searchbtn" type="submit" value="搜索">
+			</div>
+		</form>
+			<table>
+				<tr class="typeTop" align="center">
+					<td width="25">编号</td>
+					<td width="30">ID</td>
+					<td width="60">姓名</td>
+					<td width="25">性别</td>
+					<td width="35">状态</td>
+					<td width="80">修改状态</td>
+					<td width="60">订单数</td>
+					<td width="80">查看学员订单</td>
+				</tr>
+					<foreach name="coach" key="k" item="v">
+					<if condition="$k%2==0">
+						<assign name="color" value="#F0F4FD" />
+						<else />
+						<assign name="color" value="#FFFFFF" />
+					</if>
+				<tr style="background-color:{$color}" align="center">
+					<td>{$offset++}</td>
+					<td>{$v.id}</td>
+					<td>{$v.name}</td>
+
+					<if condition="$v['gender']==0">
+						<td>男</td>
+						<else />
+						<td>女</td>
+					</if>
+
+					<if condition="$v['status']==0">
+						<td>正常</td>
+					<elseif condition="$v['status']==1" />
+						<td>满员</td>
+					</if>
+				
+			
+						<td>
+							<input type="button" onclick="checkUpdate({$v.status},{$v.id})" value="点击修改" style="height:22px;width:60px;">
+						</td>
+						<td>{$v.count}</td>
+						<td>
+							<input type="button" onclick="getStudent({$v.id})" value="点击查看" style="height:22px;width:60px;">
+						</td>
+				</foreach>
+			</tr>
+			<tr>
+			<td colspan="8" class="pages" align="center">
+				<span>共{$count}名教练</span>
+			{$pageList}
+		
+			</td>
+		</tr>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

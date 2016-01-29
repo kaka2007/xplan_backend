@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>计划管理</title>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/reset.css"/>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/global.css"/>
+<script type="text/javascript" src="/xplan_backend/Plan_admin/public/jquery/jquery-1.4.js"></script>
+<style type="text/css">
+.plus{
+	background:url(/xplan_backend/Plan_admin/public/images/plus.gif) no-repeat left center;
+}
+.minus{
+	background:url(/xplan_backend/Plan_admin/public/images/minus.gif) no-repeat left center;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(
+	function(){
+		for(var $n=1;$n<5;$n++){
+			$("#div"+$n).hover(
+				function (){
+					$(this).css("background-color","gray");
+					$(this).find("div").slideDown(300);
+				},
+				function (){
+					$(this).css("background-color","#E4E9EC");
+					$(this).find("div").slideUp(300);
+				});
+		}
+})
+function toggleItem(id){
+	var menuEle=document.getElementById('menu'+id);
+	var listEle=document.getElementById('list'+id);
+	if (menuEle.style.display==''||menuEle.style.display=='block') {
+		menuEle.style.display = 'none';
+		listEle.className='plus';
+	}else{
+		menuEle.style.display = 'block';
+		listEle.className='minus';
+	}
+}
+
+function changeStatus(id){
+	var coachid=$("#coachid"+id).val();
+	var status=$("#status"+id).val();
+	var pid=$("#pid"+id).val();
+	if(status==0){
+		info="下架";
+	}else{
+		info="上架";
+	}
+	if(confirm("确认"+info+"该教练！")){
+	window.location.href="/xplan_backend/Plan_admin/index.php/home/Plan/changeStatus/coachid/"+coachid+"/status/"+status+"/pid/"+pid;
+	}
+} 
+</script>
+</head>
+<body>
+	  <div id="continer">
+<div>
+	<include file="Public:topnavi" />
+</div>
+<div id="init">
+		<div id="menu-body">
+			<include file="Public:menu" />
+		</div>
+	<div id="wel">
+	<table>
+		<tr class="typeTop" align="center">
+			<td>ID</td>
+			<td>姓名</td>
+			<td>状态</td>
+			<td>修改状态</td>
+		</tr>
+		<foreach name="coach" key="k" item="v">
+		<if condition="$k%2==0">
+		<assign name="color" value="#F0F4FD" />
+		<else />
+		<assign name="color" value="#FFFFFF" />
+		</if>
+		<tr style="background-color:{$color}" align="center">
+			<td>{$v.id}</td>
+			<td>{$v.name}</td>
+			<if condition="$v['status']==0">
+				<td><font color="green">上架</font></td>
+				<td>
+				<input onclick="changeStatus({$v.coachid})" type="button" value="下架" style="height:22px;width:60px;">
+				</td>
+			<else />
+				<td><font color="red">下架</font></td>
+				<td>
+					<input onclick="changeStatus({$v.coachid})" type="button" value="上架" style="height:22px;width:60px;">
+				</td>
+			</if>
+			<input id="coachid{$v.coachid}" type="hidden" value="{$v.coachid}">
+			<input id="status{$v.coachid}" type="hidden" value="{$v.status}">
+			<input id="pid{$v.coachid}" type="hidden" value="{$v.pid}">
+		</foreach>
+		</tr>
+		</table>
+	</div>
+	</div>
+</div>
+</body>
+</html>

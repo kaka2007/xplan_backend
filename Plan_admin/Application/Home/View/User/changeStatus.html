@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>教练与课程</title>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/reset.css"/>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/global.css"/>
+<script type="text/javascript" src="/xplan_backend/Plan_admin/public/jquery/jquery-1.4.js"></script>
+<style type="text/css">
+.plus{
+	background:url(/xplan_backend/Plan_admin/public/images/plus.gif) no-repeat left center;
+}
+.minus{
+	background:url(/xplan_backend/Plan_admin/public/images/minus.gif) no-repeat left center;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(
+	function(){
+		for(var $n=1;$n<5;$n++){
+			$("#div"+$n).hover(
+				function (){
+					$(this).css("background-color","gray");
+					$(this).find("div").slideDown(300);
+				},
+				function (){
+					$(this).css("background-color","#E4E9EC");
+					$(this).find("div").slideUp(300);
+				});
+		}
+})
+function toggleItem(id){
+	var menuEle=document.getElementById('menu'+id);
+	var listEle=document.getElementById('list'+id);
+	if (menuEle.style.display==''||menuEle.style.display=='block') {
+		menuEle.style.display = 'none';
+		listEle.className='plus';
+	}else{
+		menuEle.style.display = 'block';
+		listEle.className='minus';
+	}
+}
+
+function changeStatus(){
+	var status=$("#status").val();
+	var uid=$("#uid").val();
+	var coachid=$("#coachid").val();
+	var pid=$("#pid").val();
+	var paytime=$("#paytime").val();
+
+	if(confirm("确认修改状态！")){
+		window.location.href="/xplan_backend/Plan_admin/index.php/home/User/changeUserStatus/uid/"+uid+"/coachid/"+coachid+"/pid/"+pid+"/paytime/"+paytime+"/status/"+status;
+	}
+} 
+
+function changeEndTime(){
+	var days=$("#days").val();
+	if(days!=""){
+		if(confirm("确认修改结束时间！")){
+		var uid=$("#uid").val();
+		var coachid=$("#coachid").val();
+		var pid=$("#pid").val();
+		var paytime=$("#paytime").val();
+		var type=$("#changeType").val();
+
+		window.location.href="/xplan_backend/Plan_admin/index.php/home/User/changeEndTime/uid/"+uid+"/coachid/"+coachid+"/pid/"+pid+"/paytime/"+paytime+"/days/"+days+"/type/"+type;
+		}
+	}else{
+		alert("天数不能为空！");
+		$("#days").focus();
+	}
+}
+</script>
+</head>
+<body>
+	  <div id="continer">
+<div>
+	<include file="Public:topnavi" />
+</div>
+<div id="init">
+		<div id="menu-body">
+			<include file="Public:menu" />
+		</div>
+	<div id="wel">
+
+			<table>
+				<tr class="typeTop" align="center">
+					<td width="45">姓名</td>
+					<td width="45">教练</td>
+					<td width="80">开始时间</td>
+					<td width="80">结束时间</td>
+					<td width="170">修改状态</td>
+					<td width="150">修改结束时间</td>
+				</tr>
+				<foreach name="userInfo" key="k" item="v">
+					<if condition="$k%2==0">
+					<assign name="color" value="#F0F4FD" />
+					<else />
+					<assign name="color" value="#FFFFFF" />
+					</if>
+
+				<tr style="background-color:{$color}" align="center">
+						<td>{$v.name}</td>
+						<td>{$v.cname}</td>
+						<td>{$v.begin_time}</td>
+						<td>{$v.end_time}</td>
+						<td>当前状态：{$v.cstatus}<br>
+							选择：<select id="status">
+								<option value="1">已付款</option>
+								<option value="2">完成测试</option>
+								<option value="3">课程好</option>
+								<option value="4">已到期</option>
+							</select>
+							<input onclick="changeStatus()" type="button" value="修改" style="width:40px;">
+							<input type="hidden" id="uid" value="{$v.uid}">
+							<input type="hidden" id="coachid" value="{$v.coachid}">
+							<input type="hidden" id="pid" value="{$v.pid}">
+							<input type="hidden" id="paytime" value="{$v.pay_time}">
+						</td>
+						<td>请输入
+							<select id="changeType" style="width:55px;">
+								<option value="0">延长</option>
+								<option value="1">减少</option>
+							</select>&nbsp;天数：<br>
+							<input id="days" type="text" size="4">&nbsp;天&nbsp;&nbsp;
+							<input type="button" onclick="changeEndTime()" value="修改" style="width:40px;"> 
+						</a>
+						</td>
+				</tr>		
+				</foreach>
+			</table>
+		</div>
+	</div>
+</div>
+</body>
+</html>

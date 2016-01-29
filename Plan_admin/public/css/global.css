@@ -1,0 +1,306 @@
+
+body{
+	background-color:#B4C8E6;
+	margin-top:0px;
+	font-size:13px;
+}
+#continer{
+	width:960px;
+	margin:0 auto;
+}
+
+#message{
+	float:left;
+	width:700px;
+	text-align: center;
+}
+#message p{
+	margin-top: 18px;
+}
+
+#message #suc{
+	font-size: 25px;
+	color:red;
+}
+/*顶部页面的样式*/
+#top-body{	
+	color:white;
+	background:url(../images/image6.gif) no-repeat right;
+	background-color: #1B66B9;
+}
+#top-subject{
+	padding:0 10px;
+	border-bottom:3px solid #1C69B9;
+	line-height:77px; 
+	font:bold 28px/77px 微软雅黑;
+	margin-left: 80px;
+}
+/*navi样式*/
+#navi{
+	width: 100%;
+	height:90px; 
+}
+.navi1{
+	margin-top: 1px;
+	height: 30px;
+	background-color: #1968B6;
+}
+.navi2{
+	height: 30px; 
+	background-color: #E4E9EC;
+}
+.navi3{
+	height: 30px; 
+	background-color: #FFFFFF;
+	border-bottom: 1px solid #CCD7DE;
+	text-align: left;
+	line-height: 30px;
+}
+
+#div1,#div2,#div3,#div4{
+	text-align:center;
+	width:100px;
+	height:30px;
+	line-height:30px;
+	vertical-align:middle;
+	float:left;
+	cursor:pointer;
+	margin-left:75px;
+	color: #10557A;
+}
+.den{
+	text-align:center;
+	width:100px;
+	height:20px;
+	line-height:20px;
+	vertical-align:middle;
+	float:left;
+	cursor:pointer;	
+	margin-left: 75px;
+}
+.den a,#div1 a,#div2 a,#div3 a,#div4 a{
+	color:#10557A;
+	line-height: 30px;
+}
+.slide{
+	width:100px;
+	position:absolute;
+	display:none; 
+	background-color:#CDFFFF; 
+}
+/*菜单页面的样式*/
+#menu-body{
+	float: left;
+	width: 180px;
+	height:570px;
+	padding-top: 10px;
+	color:#fff;
+	background-color:#D3D6FF;
+	margin-right: 15px;
+}
+#menu1 li,#menu2 li,#menu3 li,#menu4 li{
+	padding-top: 5px;
+	padding-left: 40px;
+}
+#menu-body h2{
+	cursor:pointer;
+	font-size:14px;
+	line-height:1.8em;
+	font-weight:bold;
+	color:rgb(34,34,34);
+	margin-top: 5px;
+	margin-left: 5px;
+}
+#menu-body span{
+	display: block;
+	margin-left: 25px;
+}
+#menu-body a{
+	font-size:16px;
+	font-family:微软雅黑;
+	color:#1D678F;
+}
+/*右侧页面通用样式*/
+#init{
+	width:100%;
+	height: 700px;	
+}
+#wel{
+	float: left;
+	width:700px;
+	height: 550px;
+	background-color: white;
+	margin-top: 22px;
+}
+#wel #p1{
+	height:80px;
+}
+#wel h1{
+	font:bold 20px/40px 微软雅黑; 
+	text-align: center;
+}
+#wel h2{
+	font:bold 20px/80px 微软雅黑;
+	background-color: #CDFFFF;
+	text-align: center;
+}
+#wel h3{
+	margin-top: 15px;
+	font:16px/100px 微软雅黑;
+	background-color: #DCDCDC;
+	text-align: center;
+}
+
+/* listnews */
+#art{
+	padding-top: 30px;
+}
+#listTable{
+	width: 700px;
+	background-color: #DCDCDC; 
+	margin-top: 10px;
+}
+body{
+	font-size:14px;
+}
+.aaa{
+	text-align: center;
+}
+.bbb{
+	color:blue;
+}
+.search{
+	width: 700px;
+	margin-left: 150px;
+}
+.search span{
+	font-weight: bold;
+	font-size: 18px;
+}
+#art h2{
+	text-align: center;
+}
+.butt{
+	width:68px;
+	height:23px;
+	margin-left: 15px;
+	background: url(../images/search_over.gif) no-repeat;
+} 
+.searchType{
+	margin-left: 15px;
+}
+.pages a,.pages span{
+	padding:3px 5px;
+	background:#900;
+	color:#fff;
+	margin:0 5px;
+	border:1px solid #900;
+}
+.pages a:hover,.pages span{
+	background:#fff;
+	color:#900;
+	border:1px solid #900;
+}
+/* listreview */
+#reviewTable{
+	margin-top: 5px;
+}
+
+/* addNews */
+#addTable{
+	width: 700px;
+	background-color: #DCDCDC;
+}
+#addNew{
+	background-color: #BBE4FE;
+	padding-top: 25px;
+}
+#addNew h1{
+	color:#1B66B9;
+}
+#updateNew a{
+	cursor:pointer;
+	color:#1968B6;
+	font-size:18px; 
+}
+
+/* addtype */
+#name{
+	width:700px;
+	height:40px;
+	background-color: #66CCFD;
+	text-align: center;
+	font: bold 20px/40px 微软雅黑;
+	margin-top: 80px;
+}
+#typeName{
+	width:400px;
+	height:40px;
+	background-color: #66CCFD;
+	text-align: center;
+	margin:0 auto;
+	margin-top: 15px;
+	font: bold 20px/40px 微软雅黑;
+}
+#inputType{
+	height: 22px;
+	vertical-align: middle;
+}
+#button{
+	text-align: center;
+	margin-top: 15px;
+}
+#addinput{
+	width:40px;
+	height:25px;
+}
+/* listType */
+#listType table{
+	margin-left: 15px;
+	margin-top: 50px;
+	width:700px;
+	text-align: center;
+
+}
+.typeTop{
+	background-color: #4E7DD2;
+}
+.typeTop td{
+	color:white;
+	font-weight: bold;
+	font-size: 16px;
+}
+/* addUser */
+#userTable{
+	width:700px;
+	background-color: #CDFFFF;
+	margin-top: 30px;
+}
+#userTable td{
+	font-family: 微软雅黑;
+}
+
+
+/* search */
+#search{
+	width: 500px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	margin-left: 100px;
+}
+
+.searchspan{
+	font-size: 16px;
+}
+
+#searchbtn{
+	width:60px;
+	height:22px;
+}
+
+#searchname{
+	width:130px;
+	height: 20px;
+	font-size: 12px;
+	font-family: 微软雅黑;
+}

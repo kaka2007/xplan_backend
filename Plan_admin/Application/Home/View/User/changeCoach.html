@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>教练与课程</title>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/reset.css"/>
+<link type="text/css" rel="stylesheet" href="/xplan_backend/Plan_admin/public/css/global.css"/>
+<script type="text/javascript" src="/xplan_backend/Plan_admin/public/jquery/jquery-1.4.js"></script>
+<style type="text/css">
+.plus{
+	background:url(/xplan_backend/Plan_admin/public/images/plus.gif) no-repeat left center;
+}
+.minus{
+	background:url(/xplan_backend/Plan_admin/public/images/minus.gif) no-repeat left center;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(
+	function(){
+		for(var $n=1;$n<5;$n++){
+			$("#div"+$n).hover(
+				function (){
+					$(this).css("background-color","gray");
+					$(this).find("div").slideDown(300);
+				},
+				function (){
+					$(this).css("background-color","#E4E9EC");
+					$(this).find("div").slideUp(300);
+				});
+		}
+})
+function toggleItem(id){
+	var menuEle=document.getElementById('menu'+id);
+	var listEle=document.getElementById('list'+id);
+	if (menuEle.style.display==''||menuEle.style.display=='block') {
+		menuEle.style.display = 'none';
+		listEle.className='plus';
+	}else{
+		menuEle.style.display = 'block';
+		listEle.className='minus';
+	}
+}
+var newCid="";
+function getCid(k){
+	newCid=$("#coachid"+k).val();
+}
+function changeCoach(k){
+	if(newCid!=""){
+		var uid=$("#uid"+k).val();
+		var pid=$("#pid"+k).val();
+		var oldcid=$("#oldcid"+k).val();
+		var paytime=$("#pay"+k).html();
+
+		window.location.href="/xplan_backend/Plan_admin/index.php/home/User/changeCoach/uid/"+uid+"/pid/"+pid+"/oldcid/"+oldcid+"/newcid/"+newCid+"/paytime/"+paytime;
+	}else{
+		alert("请选择教练！");
+	}
+}
+
+function changeStatus(k){
+		var uid=$("#uid"+k).val();
+		var pid=$("#pid"+k).val();
+		var coachid=$("#oldcid"+k).val();
+		var paytime=$("#pay"+k).html();
+
+	window.location.href="/xplan_backend/Plan_admin/index.php/home/User/updateStatusAndTime/uid/"+uid+"/coachid/"+coachid+"/pid/"+pid+"/paytime/"+paytime;
+}
+</script>
+</head>
+<body>
+	  <div id="continer">
+<div>
+	<include file="Public:topnavi" />
+</div>
+<div id="init">
+		<div id="menu-body">
+			<include file="Public:menu" />
+		</div>
+	<div id="wel">
+
+	<table>
+		<tr class="typeTop" align="center">
+			<td width="45">姓名</td>
+			<td width="35">计划</td>
+			<td width="45">教练</td>
+			<td>付款时间</td>
+			<td width="65">状态</td>
+			<td width="130">更换教练</td>
+			<td width="150">修改状态与结束时间</td>
+		</tr>
+	<foreach name="plan" key="k" item="v">
+		<if condition="$k%2==0">
+		<assign name="color" value="#F0F4FD" />
+		<else />
+		<assign name="color" value="#FFFFFF" />
+		</if>
+		<if condition="$v['status'] != ''">
+		<tr style="background-color:{$color}" align="center">
+			<td>{$v.name}</td>
+			<td>{$v.plan}</td>
+			<td>{$v.cname}</td>
+			<td id="pay{$k}">{$v.pay_time}</td>
+			<if condition="$v['status']==0">
+				<td>未付费</td>
+			<elseif condition="$v['status']==1" />
+				<td>已付费</td>
+			<elseif condition="$v['status']==2" />
+				<td>完成测试</td>
+			<elseif condition="$v['status']==3" />
+				<td>课程好</td>
+			<elseif condition="$v['status']==4" />
+				<td>已到期</td>
+			</if>
+
+			<td>
+				
+				<select id="coachid{$k}" onchange="getCid({$k})">
+					<foreach name="coach" item="v2">
+					<if condition="$v['coachid']==$v2['id']">
+						<option value="{$v2.id}" selected="selected">{$v2.name}</option>
+						<else />
+						<option value="{$v2.id}">{$v2.name}</option>
+					</if>
+					</foreach>
+				</select>
+			
+
+				<input type="button" onclick="changeCoach({$k})" value="点击更换">
+			</td>
+			<input type="hidden" id="uid{$k}" value="{$v.uid}">
+			<input type="hidden" id="pid{$k}" value="{$v.pid}">
+			<input type="hidden" id="oldcid{$k}" value="{$v.coachid}">
+			<td>
+				
+				<input onclick="changeStatus({$k})" type="button" value="点击进入" style="height:22px;width:60px;">
+				</td>		
+			</tr>
+			</if>
+		</foreach>
+		
+
+		</table>
+
+	</div>
+	</div>
+</div>
+</body>
+</html>

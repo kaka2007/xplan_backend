@@ -1,0 +1,50 @@
+<script type="text/javascript">
+function logout(){
+	  if(confirm("是否确认退出登陆？")){
+		  window.location = "/xplan_backend/Plan_admin/index.php/home/Index/logout";
+	  }
+  }
+</script>
+<!--top navi-->
+<div id="top-body">
+		<span id="top-subject">PLAN</span>
+</div>
+<div id="navi">
+	<div class="navi1"></div>
+	<div class="navi2">
+			<div class="den">
+				<a href="#" onclick="logout()">退出后台</a>
+			</div>
+			<div id="div1">用户管理<br>
+				<div class="slide">
+					<a href="/xplan_backend/Plan_admin/index.php/home/User/getCoach">教练管理</a><br>
+					<a href="/xplan_backend/Plan_admin/index.php/home/User/getStudent">学员管理</a><br>
+				</div>
+			</div>
+			<div id="div2">计划管理<br>
+				<div class="slide">
+					<a href="">添加计划</a><br>
+					<a href="/xplan_backend/Plan_admin/index.php/home/Plan/update">修改计划</a><br>
+				</div>
+			</div>
+			<div id="div3">课程管理<br>
+				<div class="slide">
+					<a href="/xplan_backend/Plan_admin/index.php/home/Course/getTodayCourse">今日课程</a><br>
+					<a href="/xplan_backend/Plan_admin/index.php/home/Course/getTomorrowCourse">明日课程</a><br>
+					<a href="/xplan_backend/Plan_admin/index.php/home/Course/getManydayCourse">多日课程</a><br>
+				</div>
+			</div>
+			<div id="div4">添加管理员<br>
+				<div class="slide">
+					<a href="/xplan_backend/Plan_admin/index.php/home/Admin/index">添加管理员</a><br>
+					<a href="/xplan_backend/Plan_admin/index.php/home/Admin/update">修改管理员</a><br>
+				</div>
+			</div>
+
+
+<!-- 			<div class="den">
+	<a href="/xplan_backend/Plan_admin/index.php/home/Index/index">返回主页</a>
+</div> -->
+	</div>
+	<div class="navi3">{$managerTip}</div>
+</div>
